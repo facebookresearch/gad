@@ -7,20 +7,20 @@
 ## Generic Automatic Differentiation (GAD)
 
 This library aims to provide automatic differentiation by backward propagation (aka.
-"autograd") for an extensible set of algebraic operations, while allowing
-low-overhead evaluation and fast dimension checking of differentiable expressions.
+"autograd") in Rust. It is meant to be easily extensible, low-overhead, and support
+fast dimension checking.
 
 ### Motivation
 
-In this implementation of the classical tape-based backward-propagation algorithm,
-we have chosen to prioritize performance, extensibility, and idiomatic
-Rust code. In particular:
+GAD relies on a classical tape-based backward-propagation algorithm. Yet, we have
+chosen to prioritize idiomatic Rust so as we can benefit the most from the language:
 
 * The library does not use unsafe Rust features or interior mutability (e.g. `RefCell`).
 
 * Fallible operations never panic and always return a `Result` type.
 
-* Structures and values implement `Send` and `Sync` to support concurrent programming.
+* Structures and values implement `Send` and `Sync` to support concurrent programming
+out of the box.
 
 * Generic programming is encouraged so that user formulas can be interpreted in
 different modes (forward evaluation, dimension checking, etc) with minimal overhead (see

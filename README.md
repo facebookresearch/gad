@@ -9,7 +9,8 @@
 This project aims to provide a general and extensible framework for tape-based automatic differentiation (aka.
 "autograd") in Rust.
 
-See the main crate [here](https://github.com/facebookresearch/gad/tree/master/gad) for a tutorial.
+* [Main crate](https://github.com/facebookresearch/gad/tree/master/gad)
+* [Online documentation](https://docs.rs/gad/)
 
 ## Contributing
 
