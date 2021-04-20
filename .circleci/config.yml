@@ -83,7 +83,7 @@ jobs:
           name: Build and Test
           # Build all targets to ensure examples are built as well.
           command: |
-            cargo test --no-default-features
+            (cd gad && cargo test --no-default-features)
 
   # docs-build and docs-deploy are adapted from
   # https://circleci.com/blog/deploying-documentation-to-github-pages-with-continuous-integration/.
