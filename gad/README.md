@@ -45,10 +45,9 @@ automatic differentiability.
 * Because this requires an implicit mutable tape, we do not provide a concise syntax for
 formulas by overloading operators `+`, `*`, etc.
 
-* Until the Rust borrow checker is
-[improved](https://github.com/rust-lang/rust/issues/49434), operations cannot be
-nested: `let u = g.add(x, g.times(y, z));` must be written `let v = g.times(y, z); let
-u = g.add(x, &v);` or `let u = { let v = g.times(y, z); g.add(x, &v) };`.
+* Because of a current [limitation](https://github.com/rust-lang/rust/issues/49434) of
+the Rust borrow checker, expressions cannot be nested: `g.add(x, g.times(y, z))` must
+be written `let v = g.times(y, z); g.add(x, &v)`.
 
 We believe that this state of affairs could be improved in the future using Rust
 macros. Alternatively, future extensions of the library could implement operator
