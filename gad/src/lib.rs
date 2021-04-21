@@ -3,16 +3,25 @@
 
 //! # Generic Automatic Differentiation (GAD)
 //!
-//! This library aims to provide automatic differentiation by backward propagation (aka.
-//! "autograd") in Rust. It is meant to be easily extensible, low-overhead, and support
-//! fast dimension checking.
+//! This library provides automatic differentiation by backward propagation (aka.
+//! "autograd") in Rust. It was designed to be easily extensible with user-defined operators
+//! and to support multiples modes of execution with minimal overhead.
 //!
-//! ## Motivation
+//! The following modes are currently supported for all library-defined operators:
+//! first-order differentiation, higher-order differentiation, forward-only evaluation,
+//! and dimension checking.
 //!
-//! GAD relies on a classical tape-based backward-propagation algorithm. Yet, we have
-//! chosen to prioritize idiomatic Rust so as we can benefit the most from the language:
+//! ## Design Principles
 //!
-//! * The library does not use unsafe Rust features or interior mutability (e.g. `RefCell`).
+//! The core of this library implements a classic tape-based approach for [automatic
+//! differentiation in reverse
+//! mode](https://en.wikipedia.org/wiki/Automatic_differentiation#Reverse_accumulation).
+//! In this implementation, we have chosen to prioritize idiomatic Rust and generic
+//! programming over other features (say, operator overloading):
+//!
+//! * This library does not use unsafe Rust features or interior mutability (e.g.
+//! `RefCell`). Therefore, formula definitions must explicitly reference a mutable tape
+//! (noted `graph` or `g` below).
 //!
 //! * Fallible operations never panic and always return a `Result` type.
 //!
@@ -24,17 +33,24 @@
 //! sections below).
 //!
 //! While this library is primarily motivated by machine learning applications, automatic
-//! differentiation is not limited to a fixed set of operations and is meant to be easily
-//! extended (see paragraphs below).
+//! differentiation is not limited to a particular use case. In the sections below, we
+//! show how to define new operators and how to add new modes of execution while retaining
+//! automatic differentiability.
 //!
-//! ## Future work
+//! ## Limitations
 //!
-//! We have not attempted to provide a concise syntax for formulas, say, by leveraging
-//! the usual binary operators `+`, `*`, etc.
+//! * Because this requires an implicit mutable tape, we do not provide a concise syntax for
+//! formulas by overloading operators `+`, `*`, etc.
 //!
-//! We believe the current state could be improved in the future using Rust macros, or
-//! with some expected [improvements](https://github.com/rust-lang/rust/issues/49434) in
-//! the Rust borrow checker.
+//! * Until the Rust borrow checker is
+//! [improved](https://github.com/rust-lang/rust/issues/49434), operations cannot be
+//! nested: `let u = g.add(x, g.times(y, z));` must be written `let v = g.times(y, z); let
+//! u = g.add(x, &v);` or `let u = { let v = g.times(y, z); g.add(x, &v) };`.
+//!
+//! We believe that this state of affairs could be improved in the future using Rust
+//! macros. Alternatively, future extensions of the library could implement operator
+//! traits for special tensor values (containing an implicit `RefCell` reference to a
+//! common tape).
 //!
 //! ## Quick start
 //!
