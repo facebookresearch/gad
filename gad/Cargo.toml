@@ -20,7 +20,8 @@ id-arena = "2.2.1"
 num = { version = "0.4.0", features = ["serde"] }
 serde = { version = "1.0", features = ["derive"] }
 backtrace = { version = "0.3" }
-arrayfire = { version = "3.8.0", features = ["afserde"], optional = true }
+arrayfire = { version = "3.8.0", git = "https://github.com/matbd/arrayfire-rust", branch="half_f16", features = ["afserde"], optional = true }
+half = { version = "1.7.1", git = "https://github.com/matbd/half-rs", branch="num_traits", features = ["serde", "std", "num-traits"] }
 
 [dev-dependencies]
 bincode = "1.3.1"

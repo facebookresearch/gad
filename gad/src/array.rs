@@ -92,7 +92,7 @@ mod af_arith {
                 if rdims[i] == vdims[i] {
                     continue;
                 }
-                result = af::sum(&result, i as i32);
+                result = af::sum(&result, i as i32).cast();
             }
             Ok(result)
         }

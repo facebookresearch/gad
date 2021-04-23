@@ -20,8 +20,8 @@ pub trait AfAlgebra<T>:
     + crate::arith::ArithAlgebra<<Self as AfAlgebra<T>>::Scalar>
     + crate::const_arith::ConstArithAlgebra<<Self as AfAlgebra<T>>::Value, T>
     + crate::const_arith::ConstArithAlgebra<<Self as AfAlgebra<T>>::Scalar, T>
-    + crate::const_arith::ConstArithAlgebra<<Self as AfAlgebra<T>>::Value, i16>
-    + crate::const_arith::ConstArithAlgebra<<Self as AfAlgebra<T>>::Scalar, i16>
+    + crate::const_arith::ConstArithAlgebra<<Self as AfAlgebra<T>>::Value, i8>
+    + crate::const_arith::ConstArithAlgebra<<Self as AfAlgebra<T>>::Scalar, i8>
     + crate::compare::CompareAlgebra<<Self as AfAlgebra<T>>::Value>
     + crate::compare::CompareAlgebra<<Self as AfAlgebra<T>>::Scalar>
     + crate::array_compare::ArrayCompareAlgebra<<Self as AfAlgebra<T>>::Value>
@@ -66,16 +66,11 @@ pub trait Float:
     + Default
     + PartialOrd
     + num::Float
-    + From<i16>
-    + num::pow::Pow<i16, Output = Self>
+    + From<i8>
+    + num::pow::Pow<i8, Output = Self>
     + num::pow::Pow<Self, Output = Self>
-    + af::HasAfEnum<
-        InType = Self,
-        AggregateOutType = Self,
-        ProductOutType = Self,
-        UnaryOutType = Self,
-        AbsOutType = Self,
-    > + af::ImplicitPromote<Self, Output = Self>
+    + af::HasAfEnum<InType = Self, UnaryOutType = Self, AbsOutType = Self>
+    + af::ImplicitPromote<Self, Output = Self>
     + af::ConstGenerator<OutType = Self>
     + af::Convertable<OutType = Self>
     + af::FloatingPoint
@@ -85,6 +80,7 @@ pub trait Float:
 
 impl Float for f32 {}
 impl Float for f64 {}
+impl Float for half::f16 {}
 
 /// An AfAlgebra for all supported floats.
 pub trait FullAlgebra:
