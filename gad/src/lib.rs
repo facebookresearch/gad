@@ -356,12 +356,13 @@
 //! /// Symbolic expressions of type T.
 //! #[derive(Debug, PartialEq)]
 //! enum Exp_<T> {
-//! #    One,
-//! #    Zero,
 //!     Num(T),
 //!     Neg(Exp<T>),
 //!     Add(Exp<T>, Exp<T>),
 //!     Mul(Exp<T>, Exp<T>),
+//!     // ...
+//! #    One,
+//! #    Zero,
 //! }
 //!
 //! type Exp<T> = Arc<Exp_<T>>;
@@ -380,12 +381,6 @@
 //! }
 //!
 //! impl<T> ArithAlgebra<Exp<T>> for SymEval {
-//! #    fn zeros(&mut self, _v: &Exp<T>) -> Exp<T> {
-//! #        Arc::new(Exp_::Zero)
-//! #    }
-//! #    fn ones(&mut self, _v: &Exp<T>) -> Exp<T> {
-//! #        Arc::new(Exp_::One)
-//! #    }
 //!     fn neg(&mut self, v: &Exp<T>) -> Exp<T> {
 //!         Arc::new(Exp_::Neg(v.clone()))
 //!     }
@@ -396,6 +391,13 @@
 //!     fn mul(&mut self, v1: &Exp<T>, v2: &Exp<T>) -> Result<Exp<T>> {
 //!         Ok(Arc::new(Exp_::Mul(v1.clone(), v2.clone())))
 //!     }
+//!     // ...
+//! #    fn zeros(&mut self, _v: &Exp<T>) -> Exp<T> {
+//! #        Arc::new(Exp_::Zero)
+//! #    }
+//! #    fn ones(&mut self, _v: &Exp<T>) -> Exp<T> {
+//! #        Arc::new(Exp_::One)
+//! #    }
 //! }
 //!
 //! // No dimension checks.

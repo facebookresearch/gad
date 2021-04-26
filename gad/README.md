@@ -333,6 +333,7 @@ enum Exp_<T> {
     Neg(Exp<T>),
     Add(Exp<T>, Exp<T>),
     Mul(Exp<T>, Exp<T>),
+    // ...
 }
 
 type Exp<T> = Arc<Exp_<T>>;
@@ -361,6 +362,7 @@ impl<T> ArithAlgebra<Exp<T>> for SymEval {
     fn mul(&mut self, v1: &Exp<T>, v2: &Exp<T>) -> Result<Exp<T>> {
         Ok(Arc::new(Exp_::Mul(v1.clone(), v2.clone())))
     }
+    // ...
 }
 
 // No dimension checks.
