@@ -29,7 +29,7 @@ jobs:
           name: Lint (clippy)
           command: |
             cargo clippy
-  build:
+  build-all-features:
     docker:
       - image: circleci/rust:stretch
     steps:
@@ -59,10 +59,10 @@ jobs:
           name: Build and Test
           # Build all targets to ensure examples are built as well.
           command: |
-            cargo build --all-targets
-            cargo test
+            cargo build --all-targets --all-features
+            cargo test --all-features
 
-  build-no-default-features:
+  build-default:
     docker:
       - image: circleci/rust:stretch
     steps:
@@ -83,7 +83,8 @@ jobs:
           name: Build and Test
           # Build all targets to ensure examples are built as well.
           command: |
-            (cd gad && cargo test --no-default-features)
+            cargo build --all-targets
+            cargo test
 
   # docs-build and docs-deploy are adapted from
   # https://circleci.com/blog/deploying-documentation-to-github-pages-with-continuous-integration/.

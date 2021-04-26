@@ -24,6 +24,6 @@ jobs:
         export AF_PATH=/usr
         export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${AF_PATH}/lib
     - name: Build
-      run: cargo build --verbose
+      run: cargo build --verbose --all-features
     - name: Run tests
-      run: cargo test --verbose
+      run: cargo test --verbose --all-features
