@@ -97,6 +97,7 @@
 //! The default array operations of the library are currently based on
 //! [Arrayfire](https://crates.io/crates/arrayfire), a portable array library supporting GPUs
 //! and JIT-compilation.
+//!
 //! ```
 //! # #[cfg(feature = "arrayfire")] {
 //! # use gad::prelude::*;
@@ -116,6 +117,15 @@
 //! # }
 //! # }
 //! ```
+//!
+//! After installing the [arrayfire library](https://arrayfire.com/download) on your
+//! system, make sure to
+//!
+//! * select the package feature "arrayfire" in your build file `Cargo.toml` (e.g. `gad =
+//! { version = "XX", features = ["arrayfire"]}`),
+//!
+//! * run `cargo` with the environment variable `AF_PATH` set appropriately (e.g. after
+//! `export AF_PATH=/usr/local`).
 //!
 //! ## Using Generics for Forward Evaluation and Fast Dimension Checking
 //!

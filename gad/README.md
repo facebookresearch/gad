@@ -96,6 +96,7 @@ set of operations supported by a given algebra.
 The default array operations of the library are currently based on
 [Arrayfire](https://crates.io/crates/arrayfire), a portable array library supporting GPUs
 and JIT-compilation.
+
 ```rust
 use arrayfire as af;
 // A new tape supporting first-order differentials (aka gradients)
@@ -109,6 +110,15 @@ let c = g.mul(&a, &b)?;
 let direction = af::constant(1f32, dims);
 let gradients = g.evaluate_gradients_once(c.gid()?, direction)?;
 ```
+
+After installing the [arrayfire library](https://arrayfire.com/download) on your
+system, make sure to
+
+* select the package feature "arrayfire" in your build file `Cargo.toml` (e.g. `gad =
+{ version = "XX", features = ["arrayfire"]}`),
+
+* run `cargo` with the environment variable `AF_PATH` set appropriately (e.g. after
+`export AF_PATH=/usr/local`).
 
 ### Using Generics for Forward Evaluation and Fast Dimension Checking
 
