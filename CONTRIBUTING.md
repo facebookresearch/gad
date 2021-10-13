@@ -10,7 +10,7 @@ cover all of the source lines touched and added by the request.
 
 No pull request will be merged unless all tests are passing.
 
-The person approving a pull request will also merge it into master.
+The person approving a pull request will also merge it into main.
 
 ## Contributor License Agreement ("CLA")
 
