@@ -53,7 +53,7 @@ where
             let (output, info) = self.eval_with_gradient_info(&mut g, example)?;
             match &mut cumulated_output {
                 opt @ None => *opt = Some(*output.data()),
-                Some(val) => *val += *output.data(),
+                Some(val) => *val = *val + *output.data(),
             }
             // Backward pass
             let store = g.evaluate_gradients_once(output.gid()?, T::one())?;

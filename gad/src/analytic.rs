@@ -293,7 +293,7 @@ macro_rules! impl_graph {
                 + CoreAlgebra<D, Value = D>
                 + AnalyticAlgebra<D>
                 + ArithAlgebra<D>
-                + ConstArithAlgebra<D, i16>
+                + ConstArithAlgebra<D, i8>
                 + LinkedAlgebra<Value<D>, D>,
             D: HasDims<Dims = Dims> + Clone + 'static + Send + Sync,
             Dims: PartialEq + std::fmt::Debug + Clone + 'static + Send + Sync,

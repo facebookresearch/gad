@@ -553,6 +553,8 @@ mod private {
     impl Reserved for num::complex::Complex<f64> {}
     impl Reserved for num::Rational32 {}
     impl Reserved for num::Rational64 {}
+    impl Reserved for half::f16 {}
+    impl Reserved for half::bf16 {}
 }
 
 /// Supported numbers for default algebras.
@@ -560,7 +562,6 @@ pub trait Number:
     private::Reserved
     + num::Num
     + std::ops::Neg<Output = Self>
-    + std::ops::AddAssign
     + std::fmt::Debug
     + serde::Serialize
     + serde::de::DeserializeOwned
@@ -581,6 +582,8 @@ impl Number for num::complex::Complex<f32> {}
 impl Number for num::complex::Complex<f64> {}
 impl Number for num::Rational32 {}
 impl Number for num::Rational64 {}
+impl Number for half::f16 {}
+impl Number for half::bf16 {}
 
 #[cfg(test)]
 mod testing {
